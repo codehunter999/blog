@@ -1,12 +1,19 @@
 //server generate
 require('dotenv').config();
-const Koa = require('koa');
-const Router = require('koa-router');
-const bodyParser = require('koa-bodyparser');
+import Koa from 'koa';
+import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 //mongoDB 연결 connect 함수 사용
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import api from './api';
 
-const api = require('./api');
+// const Koa = require('koa');
+// const Router = require('koa-router');
+// const bodyParser = require('koa-bodyparser');
+//mongoDB 연결 connect 함수 사용
+// const mongoose = require('mongoose');
+
+// const api = require('./api');
 
 //비구조화 할당을 통해 process.env 내부 값에 대한 레퍼런스 만들기
 const { PORT, MONGO_URI } = process.env;
