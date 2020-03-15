@@ -60,10 +60,44 @@ export const write = async ctx => {
   데이터를 조회할 때는 모델 인스턴스의 find()함수를 사용
 */
 export const list = async ctx => {
+  //query는 문자열이기 때문에 숫자로 변환해 주어야 합니다.
+  //값이 주어지지 않았다면 1을 기본으로 사용합니다.
+  const page = parseInt(ctx.request.page || '1', 10);
+  console.log(page);
+
+  if (page < 1) {
+    ctx.status = 400;
+    return;
+  }
+
   try {
     //find()함수를 호출한 후에 exec()를 붙여 주어야 서버에 쿼리를 요청함
-    const posts = await Post.find().exec();
-    ctx.body = posts;
+    const posts = await Post.find()
+      .sort({ _id: -1 }) //key:1 형식으로 작성, 1이면 오름차순, -1이면 내림차순
+      .limit(10) //보이는 개수 제한
+      .skip((page - 1) * 10) //skip함수에 파라미터를 10 넣어주면 10개를 제외한 다음 데이터를 불러온다.
+      .lean()  //인스턴스 형태의 데이터를 변형없이 바로 JSON형태로 조회할 수 있다.
+      .exec();
+    const postCount = await Post.countDocuments().exec();
+    ctx.set('Last-Page', Math.ceil(postCount / 10)); //Last-Page라는 커스텀 HTTP헤더를 설정함.
+    
+    // !!! 200자 제한 case1 !!!!
+    // ctx.body = posts
+    //   .map(post => post.toJSON())
+    //   .map(post => ({
+    //     ...post,
+    //     body:
+    //       post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`,
+    //   }));
+
+    // !!! 200자 제한 case2 !!!!
+    ctx.body = posts      
+      .map(post => ({
+        ...post,
+        body:
+          post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`,
+      }));    
+
   } catch (e) {
     ctx.throw(500, e);
   }
