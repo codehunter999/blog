@@ -47,6 +47,13 @@ export const register = async ctx => {
     // ctx.body = data;
     // ㅁ CASE 2 : serialize함수 사용
     ctx.body = user.serialize();
+
+    //쿠키에 토큰을 담아서 전달
+    const token = user.generateToken();
+    ctx.cookies.set('access_token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7, //7일
+      httpOnly: true,
+    });
   } catch (e) {
     ctx.throw(500, e);
   }
@@ -64,33 +71,49 @@ export const login = async ctx => {
   const { username, password } = ctx.request.body;
 
   //username, password가 없으면 에러 처리
-  if(!username || !password){
+  if (!username || !password) {
     ctx.status = 401; //unauthrized
     return;
   }
 
-  try{
+  try {
     const user = await User.findByUsername(username);
     //계정이 존재하지 않으면 에러처리
-    if(!user){
+    if (!user) {
       ctx.status = 401;
       return;
     }
     const valid = await user.checkPassword(password);
     //잘못된 비밀번호
-    if(!valid){
+    if (!valid) {
       ctx.status = 401;
       return;
     }
     ctx.body = user.serialize();
-  }
-  catch(e){
+
+    //cookie에 담아서 토큰 전달
+    const token = user.generateToken();
+    ctx.cookies.set('access_token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      httpOnly: true,
+    });
+  } catch (e) {
     ctx.throw(500, e);
   }
 };
 
+/*
+  GET /api/auth/check
+*/
 export const check = async ctx => {
   //로그인 상태 확인
+  const { user } = ctx.state;
+  if(!user){
+    //로그인 중 아님
+    ctx.status = 401; //Unauthorized
+    return;
+  }
+  ctx.body = user;
 };
 
 export const logout = async ctx => {
