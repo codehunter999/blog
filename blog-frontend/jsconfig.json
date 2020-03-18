@@ -1,6 +1,0 @@
-//v프로젝트에서 자동 import기능이 제대로 작동할수 있게 하는 파일
-{
-    "compilerOptions": {
-        "target":"es6"
-    }
-}

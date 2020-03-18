@@ -1,7 +1,12 @@
 import React from 'react';
+import Button from '../components/common/Button';
 
 const PostListPage = () => {
-    return <div>PostList</div>;
-}
+  return (
+    <div>
+      <Button>Button</Button>
+    </div>
+  );
+};
 
 export default PostListPage;
