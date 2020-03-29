@@ -7,6 +7,9 @@ const RegisterPage = () => {
         <AuthTemplate>
             <AuthForm/>
         </AuthTemplate>        
+
+
+<AuthForm></AuthForm>
     );
 }
 
