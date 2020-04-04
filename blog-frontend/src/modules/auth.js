@@ -7,14 +7,14 @@ const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }) => ({
-    from, //register, login
+    form, //register, login
     key, //username, password, passwordConfirm
     value, //실제 바꾸려는 값
   }),
 );
 
-
 export const initializeForm = createAction(INITIALIZE_FORM, form => form); //register/login
+
 const initialState = {
   register: {
     username: '',
