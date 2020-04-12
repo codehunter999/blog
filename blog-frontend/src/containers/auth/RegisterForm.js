@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
+import { check } from '../../modules/user';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const { form, auth, authError } = useSelector(({ auth, user }) => ({
     form: auth.register,
     auth: auth.auth,
-    authError: auth.authError
+    authError: auth.authError,
+    user: user.user,
   }));
 
   //인풋 변경 이벤트 핸들러
-  const onChange = e => {
+  const onChange = (e) => {
     const { value, name } = e.target;
     dispatch(
       changeField({
@@ -24,10 +26,10 @@ const RegisterForm = () => {
   };
 
   //폼 등록 이벤트 핸들러
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     const { username, password, passwordConfirm } = form;
-    if(password !== passwordConfirm) {
+    if (password !== passwordConfirm) {
       //TODO: 오류 처리
       return;
     }
@@ -41,16 +43,25 @@ const RegisterForm = () => {
 
   //회원가입 성공/실패 처리
   useEffect(() => {
-    if(authError){
+    if (authError) {
       console.log('오류 발생');
       console.log(authError);
       return;
     }
-    if(auth){
+    if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-    }    
-  }, [auth, authError]);
+      dispatch(check());
+    }
+  }, [auth, authError, dispatch]);
+
+  //user 값이 잘 설정되었는지 확인
+  useEffect(() => {
+    if (user) {
+      console.log('check API 성공');
+      console.log(user);
+    }
+  }, [user]);
 
   return (
     <AuthForm

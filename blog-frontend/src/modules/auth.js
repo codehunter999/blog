@@ -18,8 +18,12 @@ const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 // const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 // const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 
-const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes('auth/REGISTER');
-const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('auth/LOGIN');
+const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
+  'auth/REGISTER',
+);
+const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
+  'auth/LOGIN',
+);
 
 export const changeField = createAction(
   CHANGE_FIELD,
@@ -66,7 +70,7 @@ const initialState = {
 const auth = handleActions(
   {
     [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft[form][key] = value; //예: state.register.username을 바꾼다.
       }),
     [INITIALIZE_FORM]: (state, { payload: form }) => ({
