@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/user';
+import { withRouter } from 'react-router-dom';
 
-const RegisterForm = () => {
+const RegisterForm = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
@@ -62,6 +63,13 @@ const RegisterForm = () => {
       console.log(user);
     }
   }, [user]);
+
+  //user값이 잘 설정되었는지 확인
+  useEffect(() => {
+    if (user) {
+      history.pushState('/'); //홈 화면으로 이동
+    }
+  }, [history, user]);
 
   return (
     <AuthForm
