@@ -1,4 +1,4 @@
-//회원인증에 필요한 API를 사용하기 쉽게 함수와
+//회원인증에 필요한 API를 사용하기 쉽게 함수화
 import client from './client';
 
 //로그인

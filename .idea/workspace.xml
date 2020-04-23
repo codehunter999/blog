@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df7a0b8c-37d6-4981-b11a-41a6c92fcf2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog-frontend/src/containers/auth/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog-frontend/src/containers/auth/RegisterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-frontend/src/modules/loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog-frontend/src/modules/loading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-frontend/src/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog-frontend/src/modules/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-frontend/src/lib/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog-frontend/src/lib/api/auth.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +32,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.build">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/blog-frontend/package.json" />
       <command value="run" />
@@ -78,6 +74,7 @@
       <workItem from="1583833412788" duration="599000" />
       <workItem from="1587472533010" duration="660000" />
       <workItem from="1587475402481" duration="425000" />
+      <workItem from="1587650447146" duration="166000" />
     </task>
     <servers />
   </component>

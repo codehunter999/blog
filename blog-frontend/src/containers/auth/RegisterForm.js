@@ -81,4 +81,4 @@ const RegisterForm = ({ history }) => {
   );
 };
 
-export default RegisterForm;
+export default withRouter(RegisterForm);
